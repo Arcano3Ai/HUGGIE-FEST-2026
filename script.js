@@ -218,28 +218,23 @@ function initAudioPlayer() {
     }
   }
 
-  function toggleMusic() {
+  function toggleMusic(e) {
+    if (e) e.preventDefault();
     if (!isPlaying) {
+      setPlayingState(true);
       if (audio) {
-        audio.play()
-          .then(() => {
-            setPlayingState(true);
-          })
-          .catch(() => {
-            // Fallback to synthesized cheerful tone if mp3 is absent
-            startSynthCelebration();
-            setPlayingState(true);
-          });
+        audio.play().catch(() => {
+          startSynthCelebration();
+        });
       } else {
         startSynthCelebration();
-        setPlayingState(true);
       }
     } else {
+      setPlayingState(false);
       if (audio) {
-        audio.pause();
+        try { audio.pause(); } catch(err) {}
       }
       stopSynthCelebration();
-      setPlayingState(false);
     }
   }
 
@@ -247,7 +242,7 @@ function initAudioPlayer() {
     isPlaying = playing;
     if (playing) {
       musicBtn.classList.add('playing');
-      musicIcon.textContent = '🔊';
+      musicIcon.textContent = '🔇';
       musicText.textContent = 'SILENCIAR';
     } else {
       musicBtn.classList.remove('playing');
