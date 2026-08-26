@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Huggie Fest 2026 🎉 | Estás Invitad@</title>
+  
+  <!-- SEO & Meta Tags -->
+  <meta name="description" content="Estás oficialmente invitad@ al Huggie Fest 2026. Sábado 29 de agosto de 2026 a las 8:00 PM en Monterrey.">
+  <meta name="keywords" content="Huggie Fest 2026, Fiesta Monterrey, Invitación Digital, Festival Neón">
+  <meta name="author" content="Huggie Fest">
+  <meta name="theme-color" content="#0a0a12">
+
+  <!-- Open Graph / WhatsApp / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://huggiefest2026.com/">
+  <meta property="og:title" content="🎉 HUGGIE FEST 2026 | ¡Estás Oficialmente Invitad@!">
+  <meta property="og:description" content="Estás oficialmente invitad@ al Huggie Fest 2026. Sábado 29 de agosto de 2026 a las 8:00 PM en Monterrey. ¡No te lo puedes perder!">
+  <meta property="og:image" content="assets/images/og-preview.png">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="🎉 HUGGIE FEST 2026 | ¡Estás Oficialmente Invitad@!">
+  <meta name="twitter:description" content="Estás oficialmente invitad@ al Huggie Fest 2026. Sábado 29 de agosto de 2026 a las 8:00 PM en Monterrey.">
+  <meta name="twitter:image" content="assets/images/og-preview.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;0,900;1,900&family=Permanent+Marker&family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Canvas Background for Neon Confetti & Floating Lights -->
+  <canvas id="party-canvas" aria-hidden="true"></canvas>
+
+  <!-- Audio Element -->
+  <audio id="bg-audio" preload="none">
+    <source src="assets/music/huggie-fest.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Audio Controls Bar -->
+  <aside class="audio-control-bar">
+    <button id="music-btn" class="music-toggle-btn" aria-label="Controlar música de fiesta">
+      <span class="music-icon" id="music-icon">🎵</span>
+      <span id="music-text">ACTIVAR MÚSICA</span>
+    </button>
+  </aside>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/528133939081?text=%C2%A1Confirmo%20mi%20asistencia%20al%20Huggie%20Fest%202026!%20%F0%9F%8E%89%F0%9F%8D%BB" 
+     class="whatsapp-floating-btn" 
+     target="_blank" 
+     rel="noopener noreferrer" 
+     aria-label="Contactar por WhatsApp al 813 393 9081">
+    <span class="wa-glow"></span>
+    <span class="wa-icon">💬</span>
+    <span class="wa-label">WhatsApp</span>
+  </a>
+
+  <main class="page-wrapper">
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <header class="hero-section" id="portada">
+      <!-- Neon Decorative Badges / Emojis -->
+      <div class="hero-decorations" aria-hidden="true">
+        <span class="neon-sticker sticker-rock">🤘</span>
+        <span class="neon-sticker sticker-bolt">⚡</span>
+        <span class="neon-sticker sticker-sun">😎</span>
+        <span class="neon-sticker sticker-sparkle">✨</span>
+      </div>
+
+      <div class="hero-content">
+        <div class="official-badge neon-border-cyan animate-pulse">
+          <span class="badge-dot"></span>
+          <span>¡ESTÁS OFICIALMENTE INVITAD@!</span>
+          <span class="badge-dot"></span>
+        </div>
+
+        <h1 class="main-title">
+          <span class="title-huggie neon-text-white">HUGGIE</span>
+          <span class="title-fest neon-text-yellow">FEST</span>
+          <span class="title-year neon-text-pink">2026</span>
+        </h1>
+
+        <div class="hero-meta-box neon-frame-pink">
+          <div class="meta-item">
+            <span class="meta-icon">📅</span>
+            <span class="meta-label">SÁBADO 29 DE AGOSTO</span>
+          </div>
+          <div class="meta-divider">|</div>
+          <div class="meta-item">
+            <span class="meta-icon">🕗</span>
+            <span class="meta-label">8:00 PM</span>
+          </div>
+        </div>
+
+        <div class="hero-cta-wrapper">
+          <a href="#mensaje" class="neon-btn-primary" id="btn-ver-invitacion">
+            <span class="btn-icon">🎟️</span>
+            <span class="btn-text">VER INVITACIÓN</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="scroll-indicator" aria-hidden="true">
+        <span class="scroll-arrow"></span>
+      </div>
+    </header>
+
+    <!-- ==================== MENSAJE DE BIENVENIDA ==================== -->
+    <section class="section-container" id="mensaje">
+      <div class="glass-card neon-card-yellow reveal-on-scroll">
+        <div class="section-emoji-header">
+          <span class="party-emoji bounce">🥳</span>
+          <h2 class="section-heading neon-text-yellow">¡YA ESTÁS INVITAD@!</h2>
+          <span class="party-emoji bounce delay-1">🥳</span>
+        </div>
+        <p class="lead-message">
+          Prepárate porque se viene una noche legendaria de <strong class="highlight-pink">comida</strong>, 
+          <strong class="highlight-cyan">baile</strong>, <strong class="highlight-yellow">bebidas</strong>, 
+          <strong class="highlight-green">risas</strong> y <strong class="highlight-purple">mucha diversión</strong>.
+        </p>
+        <div class="banner-highlight neon-banner-cyan">
+          <span>🔥 ESTE ES EL EVENTO QUE NO TE PUEDES PERDER 🔥</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== FECHA Y CONTADOR ==================== -->
+    <section class="section-container" id="fecha">
+      <div class="glass-card neon-card-pink reveal-on-scroll">
+        <div class="event-info-grid">
+          
+          <!-- Tarjeta Fecha -->
+          <div class="info-tile date-tile">
+            <div class="tile-icon-wrapper neon-icon-pink">
+              <span class="icon-lg">📅</span>
+            </div>
+            <div class="tile-details">
+              <span class="tile-tagline">FECHA OFICIAL</span>
+              <h3 class="tile-title-main">SÁBADO</h3>
+              <p class="tile-highlight neon-text-yellow">29 AGOSTO 2026</p>
+            </div>
+          </div>
+
+          <!-- Tarjeta Hora -->
+          <div class="info-tile time-tile">
+            <div class="tile-icon-wrapper neon-icon-cyan">
+              <span class="icon-lg">🕗</span>
+            </div>
+            <div class="tile-details">
+              <span class="tile-tagline">HORA DE INICIO</span>
+              <h3 class="tile-title-main">8:00 PM</h3>
+              <p class="tile-sub neon-text-cyan">"HASTA QUE TE VAYAS"</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Dynamic Countdown -->
+        <div class="countdown-wrapper neon-frame-cyan">
+          <h4 class="countdown-title">⏱️ CUENTA REGRESIVA PARA LA FIESTA</h4>
+          <div class="countdown-timer" id="countdown">
+            <div class="time-block">
+              <span class="time-val" id="cd-days">00</span>
+              <span class="time-label">Días</span>
+            </div>
+            <span class="time-separator">:</span>
+            <div class="time-block">
+              <span class="time-val" id="cd-hours">00</span>
+              <span class="time-label">Horas</span>
+            </div>
+            <span class="time-separator">:</span>
+            <div class="time-block">
+              <span class="time-val" id="cd-minutes">00</span>
+              <span class="time-label">Min</span>
+            </div>
+            <span class="time-separator">:</span>
+            <div class="time-block">
+              <span class="time-val" id="cd-seconds">00</span>
+              <span class="time-label">Seg</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Botón Calendario -->
+        <div class="calendar-action-wrapper">
+          <button id="add-to-calendar-btn" class="neon-btn-secondary" aria-label="Agregar Huggie Fest al calendario">
+            <span class="btn-icon">📅</span>
+            <span>AGREGAR AL CALENDARIO</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== UBICACIÓN ==================== -->
+    <section class="section-container" id="ubicacion">
+      <div class="glass-card neon-card-cyan reveal-on-scroll">
+        <div class="section-emoji-header">
+          <span class="party-emoji">📍</span>
+          <h2 class="section-heading neon-text-cyan">¿DÓNDE ES LA CITA?</h2>
+        </div>
+
+        <div class="location-details">
+          <p class="address-street neon-text-white">MAR ADRIÁTICO 8532</p>
+          <p class="address-colony">COL. LOMA LINDA</p>
+          <p class="address-city neon-text-yellow">MONTERREY, NUEVO LEÓN</p>
+        </div>
+
+        <div class="location-actions">
+          <a href="https://www.google.com/maps/search/?api=1&query=Mar+Adriatico+8532,+Col+Loma+Linda,+Monterrey,+NL" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             class="neon-btn-map" 
+             id="btn-como-llegar">
+            <span class="btn-icon">🗺️</span>
+            <span>CÓMO LLEGAR (GOOGLE MAPS)</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ¿QUÉ HABRÁ? ==================== -->
+    <section class="section-container" id="que-habra">
+      <div class="section-header-center reveal-on-scroll">
+        <span class="sub-badge neon-border-pink">MENÚ Y EXPERIENCIA</span>
+        <h2 class="section-heading-lg neon-text-yellow">¿QUÉ HABRÁ EN EL FESTIVAL?</h2>
+      </div>
+
+      <div class="features-grid">
+
+        <!-- Comida -->
+        <article class="feature-card neon-card-green reveal-on-scroll">
+          <div class="feature-icon-badge">🌮</div>
+          <h3 class="feature-title neon-text-green">COMIDA</h3>
+          <p class="feature-desc">Deliciosos antojitos para deleitar el paladar desde temprano.</p>
+        </article>
+
+        <!-- Baile -->
+        <article class="feature-card neon-card-purple reveal-on-scroll">
+          <div class="feature-icon-badge">💃🕺</div>
+          <h3 class="feature-title neon-text-purple">BAILE</h3>
+          <p class="feature-desc">La pista encendida toda la noche con el mejor ambiente festivo.</p>
+        </article>
+
+        <!-- Duritos Patty Star -->
+        <article class="feature-card feature-star-card neon-card-yellow reveal-on-scroll">
+          <div class="feature-badge-special">⭐ EXCLUSIVO ⭐</div>
+          <div class="feature-icon-badge">⭐</div>
+          <h3 class="feature-title neon-text-yellow">DURITOS PATTY STAR</h3>
+          <p class="feature-desc">La botana estelar e imperdible de la casa con toda su magia.</p>
+        </article>
+
+        <!-- Pozole Trasnochador -->
+        <article class="feature-card neon-card-pink reveal-on-scroll">
+          <div class="feature-badge-special">🥣 LA ESPECIALIDAD 🥣</div>
+          <div class="feature-icon-badge">🍲</div>
+          <h3 class="feature-title neon-text-pink">POZOLE TRASNOCHADOR</h3>
+          <p class="feature-desc">Para recargar energía en la madrugada como se debe.</p>
+        </article>
+
+        <!-- Mucha Diversión -->
+        <article class="feature-card neon-card-cyan reveal-on-scroll">
+          <div class="feature-icon-badge">🎉</div>
+          <h3 class="feature-title neon-text-cyan">MUCHA DIVERSIÓN</h3>
+          <p class="feature-desc">Risas garantizadas, fotos épicas y anécdotas para recordar.</p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ==================== BEBIDA ==================== -->
+    <section class="section-container" id="bebidas">
+      <div class="drink-spotlight-card neon-card-yellow reveal-on-scroll">
+        <div class="drink-visual-header">
+          <span class="drink-icon clink-left">🍻</span>
+          <span class="drink-icon sparkle-center">🍹</span>
+          <span class="drink-icon clink-right">🥂</span>
+        </div>
+
+        <h2 class="drink-heading neon-text-yellow">¡NO OLVIDES TU BEBIDA!</h2>
+        
+        <div class="byob-banner neon-banner-pink">
+          <span class="byob-text">🚨 TRAER TU BEBIDA FAVORITA 🚨</span>
+        </div>
+
+        <p class="drink-text">
+          ¡Ven bien preparad@ con tus cervezas, mixología o refrescos favoritos para brindar toda la noche!
+        </p>
+
+        <div class="drink-cheers-row">
+          <span class="cheers-tag">🍺 Cerveza Fría</span>
+          <span class="cheers-tag">🍸 Mixología</span>
+          <span class="cheers-tag">🥤 Bebidas & Hielo</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== MENSAJE DIVERTIDO ==================== -->
+    <section class="section-container" id="aviso-divertido">
+      <div class="warning-cancel-card neon-card-red reveal-on-scroll">
+        
+        <div class="warning-title-wrapper">
+          <span class="warning-sign">🚨</span>
+          <h2 class="warning-title neon-text-pink">AVISO IMPORTANTE</h2>
+          <span class="warning-sign">🚨</span>
+        </div>
+
+        <p class="warning-question">"Si ya tenías otro compromiso ese día..."</p>
+
+        <div class="events-cancel-list">
+          <div class="cancel-item">
+            <span class="cancel-x">❌</span>
+            <span class="cancel-name">Fiesta infantil</span>
+          </div>
+          <div class="cancel-item">
+            <span class="cancel-x">❌</span>
+            <span class="cancel-name">XV años</span>
+          </div>
+          <div class="cancel-item">
+            <span class="cancel-x">❌</span>
+            <span class="cancel-name">Boda</span>
+          </div>
+          <div class="cancel-item">
+            <span class="cancel-x">❌</span>
+            <span class="cancel-name">Desboda</span>
+          </div>
+          <div class="cancel-item">
+            <span class="cancel-x">❌</span>
+            <span class="cancel-name">Cumpleaños</span>
+          </div>
+          <div class="cancel-item">
+            <span class="cancel-x">❌</span>
+            <span class="cancel-name">Reunión familiar</span>
+          </div>
+          <div class="cancel-item">
+            <span class="cancel-x">❌</span>
+            <span class="cancel-name">Cualquier otro evento</span>
+          </div>
+        </div>
+
+        <div class="cancel-verdict-box neon-frame-pink">
+          <h3 class="verdict-main neon-text-yellow">CANCELA.<br>YA TIENES PLAN.</h3>
+          <p class="verdict-sub neon-text-white">HUGGIE FEST 2026</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== CONFIRMAR ASISTENCIA ==================== -->
+    <section class="section-container" id="confirmar">
+      <div class="rsvp-card neon-card-green reveal-on-scroll">
+        
+        <div class="rsvp-header">
+          <span class="rsvp-avatar">😉</span>
+          <h2 class="rsvp-title neon-text-green">¿VAS A VENIR?</h2>
+        </div>
+
+        <p class="rsvp-submessage">
+          "Espero contar con tu asistencia para hacer de esta noche algo inolvidable."
+        </p>
+
+        <div class="rsvp-action">
+          <a href="https://wa.me/528133939081?text=%C2%A1Confirmo%20mi%20asistencia%20al%20Huggie%20Fest%202026!%20%F0%9F%8E%89%F0%9F%8D%BB" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             class="neon-btn-rsvp pulse-cta" 
+             id="btn-confirmar-whatsapp">
+            <span class="btn-icon">✅</span>
+            <span>CONFIRMAR ASISTENCIA</span>
+          </a>
+        </div>
+
+        <div class="rsvp-contact-info neon-border-cyan">
+          <p class="contact-hint">
+            📱 Si te pierdes o no sabes usar Maps, estaré al pendiente de tu llamada o WhatsApp:
+          </p>
+          <a href="tel:8133939081" class="contact-phone-link neon-text-yellow">
+            📞 813 393 9081
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="main-footer">
+      <div class="footer-neon-line"></div>
+      <p class="footer-title neon-text-pink">🎉 HUGGIE FEST 2026 🎉</p>
+      <p class="footer-tagline">"Una fiesta legendaria hecha para disfrutar al máximo"</p>
+      <p class="footer-location">Monterrey, Nuevo León • 29 de Agosto 2026</p>
+    </footer>
+
+  </main>
+
+  <!-- Script -->
+  <script src="script.js"></script>
+</body>
+</html>
