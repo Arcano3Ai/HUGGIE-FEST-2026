@@ -448,11 +448,80 @@ body {
   animation: pulse-btn 2.2s infinite;
 }
 
-.neon-btn-primary:hover {
+.hero-cta-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.neon-btn-share {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background: rgba(0, 240, 255, 0.15);
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: 1.05rem;
+  letter-spacing: 0.5px;
+  padding: 1.1rem 1.8rem;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--neon-cyan);
+  box-shadow: 0 0 20px var(--neon-cyan-glow);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.neon-btn-share:hover {
+  background: var(--neon-cyan);
+  color: #07070d;
+  box-shadow: 0 0 35px var(--neon-cyan);
   transform: translateY(-4px) scale(1.03);
-  box-shadow: 
-    0 0 40px var(--neon-yellow),
-    0 12px 35px rgba(255, 230, 0, 0.6);
+}
+
+.rsvp-extra-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 1.2rem;
+}
+
+.neon-btn-share-secondary, .neon-btn-download {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.3rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.neon-btn-share-secondary {
+  background: rgba(0, 240, 255, 0.12);
+  border: 1.5px solid var(--neon-cyan);
+  color: #fff;
+  box-shadow: 0 0 12px var(--neon-cyan-glow);
+}
+
+.neon-btn-download {
+  background: rgba(255, 230, 0, 0.12);
+  border: 1.5px solid var(--neon-yellow);
+  color: #fff;
+  box-shadow: 0 0 12px var(--neon-yellow-glow);
+}
+
+.neon-btn-share-secondary:hover, .neon-btn-download:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.2);
 }
 
 .scroll-indicator {

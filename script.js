@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCalendarGenerator();
   initScrollReveal();
   initSmoothScroll();
+  initShareFeature();
 });
 
 /* ==========================================================================
@@ -353,4 +354,44 @@ function initSmoothScroll() {
       target.scrollIntoView({ behavior: 'smooth' });
     }
   });
+}
+
+/* ==========================================================================
+   7. SHARE INVITATION (Web Share API & WhatsApp Direct)
+   ========================================================================== */
+function initShareFeature() {
+  const shareBtns = [
+    document.getElementById('btn-share-invite'),
+    document.getElementById('btn-share-rsvp')
+  ].filter(Boolean);
+
+  if (!shareBtns.length) return;
+
+  const shareData = {
+    title: '🎉 HUGGIE FEST 2026',
+    text: '¡Estás oficialmente invitad@ al Huggie Fest 2026! 🍻🌮 Cancela cualquier otro evento porque este es el bueno. Toca para ver la invitación oficial:',
+    url: 'https://arcano3ai.github.io/HUGGIE-FEST-2026/'
+  };
+
+  shareBtns.forEach((btn) => {
+    btn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      if (navigator.share) {
+        try {
+          await navigator.share(shareData);
+        } catch (err) {
+          if (err.name !== 'AbortError') {
+            openWhatsAppFallback();
+          }
+        }
+      } else {
+        openWhatsAppFallback();
+      }
+    });
+  });
+
+  function openWhatsAppFallback() {
+    const waText = encodeURIComponent(`${shareData.text}\n\n👉 ${shareData.url}`);
+    window.open(`https://api.whatsapp.com/send?text=${waText}`, '_blank', 'noopener,noreferrer');
+  }
 }
