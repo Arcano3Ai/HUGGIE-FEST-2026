@@ -163,7 +163,7 @@ function initNeonCanvas() {
 }
 
 /* ==========================================================================
-   3. AUDIO PLAYER (Reproducción limpia de assets/music/huggie-fest.mp3)
+   3. AUDIO PLAYER (Autoplay inmediato & Desbloqueo Automático)
    ========================================================================== */
 function initAudioPlayer() {
   const musicBtn = document.getElementById('music-btn');
@@ -184,7 +184,8 @@ function initAudioPlayer() {
           setPlayingState(true);
         })
         .catch((err) => {
-          console.log('Reproducción esperando interacción del usuario:', err);
+          // El navegador requiere gesto del usuario; se desbloqueará con el primer gesto
+          console.log('Autoplay deferred:', err);
         });
     }
   }
@@ -225,22 +226,30 @@ function initAudioPlayer() {
     audio.play().catch(() => setPlayingState(false));
   });
 
-  // Intento de reproducción al cargar
-  setTimeout(() => {
-    playAudio();
-  }, 500);
+  // Intentos inmediatos de reproducción automática
+  playAudio();
+  [100, 300, 600, 1000].forEach((delay) => {
+    setTimeout(() => {
+      if (!isPlaying) playAudio();
+    }, delay);
+  });
 
-  // Desbloqueo en móvil al primer toque
-  const unlockOnFirstTouch = () => {
+  // Desbloqueo omnicanal automático con cualquier interacción al entrar
+  const unlockAudio = () => {
     if (!isPlaying) {
       playAudio();
     }
-    window.removeEventListener('touchstart', unlockOnFirstTouch);
-    window.removeEventListener('click', unlockOnFirstTouch);
+    events.forEach((evt) => {
+      window.removeEventListener(evt, unlockAudio, { capture: true });
+      document.removeEventListener(evt, unlockAudio, { capture: true });
+    });
   };
 
-  window.addEventListener('touchstart', unlockOnFirstTouch, { passive: true, once: true });
-  window.addEventListener('click', unlockOnFirstTouch, { passive: true, once: true });
+  const events = ['touchstart', 'touchend', 'pointerdown', 'scroll', 'click', 'keydown', 'wheel'];
+  events.forEach((evt) => {
+    window.addEventListener(evt, unlockAudio, { capture: true, once: true, passive: true });
+    document.addEventListener(evt, unlockAudio, { capture: true, once: true, passive: true });
+  });
 }
 
 /* ==========================================================================
