@@ -163,7 +163,7 @@ function initNeonCanvas() {
 }
 
 /* ==========================================================================
-   3. AUDIO PLAYER (Autoplay, Mobile Unlock & Synth Fallback)
+   3. AUDIO PLAYER (Reproducción limpia de assets/music/huggie-fest.mp3)
    ========================================================================== */
 function initAudioPlayer() {
   const musicBtn = document.getElementById('music-btn');
@@ -171,87 +171,31 @@ function initAudioPlayer() {
   const musicText = document.getElementById('music-text');
   const audio = document.getElementById('bg-audio');
 
-  if (!musicBtn) return;
+  if (!musicBtn || !audio) return;
 
   let isPlaying = false;
-  let synthLoop = null;
-  let audioCtx = null;
-  let userInteracted = false;
-
-  // Synthesized celebratory beat fallback
-  function startSynthCelebration() {
-    try {
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      if (!AudioContext) return;
-      if (!audioCtx) audioCtx = new AudioContext();
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-
-      const notes = [261.63, 329.63, 392.00, 523.25, 440.00, 349.23];
-      let step = 0;
-
-      if (synthLoop) clearInterval(synthLoop);
-      synthLoop = setInterval(() => {
-        if (!isPlaying) return;
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(notes[step % notes.length], audioCtx.currentTime);
-
-        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.28);
-
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.3);
-        step++;
-      }, 300);
-    } catch (e) {
-      console.log('Audio synth fallback not supported');
-    }
-  }
-
-  function stopSynthCelebration() {
-    if (synthLoop) {
-      clearInterval(synthLoop);
-      synthLoop = null;
-    }
-  }
 
   function playAudio() {
     if (isPlaying) return;
-    setPlayingState(true);
-    if (audio) {
-      const playPromise = audio.play();
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            setPlayingState(true);
-          })
-          .catch((err) => {
-            console.log('Autoplay deferred until user interaction or fallback:', err);
-            // If native audio playback was rejected, use synth or wait for touch
-            startSynthCelebration();
-          });
-      }
-    } else {
-      startSynthCelebration();
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          setPlayingState(true);
+        })
+        .catch((err) => {
+          console.log('Reproducción esperando interacción del usuario:', err);
+        });
     }
   }
 
   function pauseAudio() {
+    audio.pause();
     setPlayingState(false);
-    if (audio) {
-      try { audio.pause(); } catch(err) {}
-    }
-    stopSynthCelebration();
   }
 
   function toggleMusic(e) {
     if (e) e.preventDefault();
-    userInteracted = true;
     if (!isPlaying) {
       playAudio();
     } else {
@@ -274,35 +218,29 @@ function initAudioPlayer() {
 
   musicBtn.addEventListener('click', toggleMusic);
 
-  if (audio) {
-    audio.addEventListener('ended', () => {
-      audio.currentTime = 0;
-      audio.play().catch(() => setPlayingState(false));
-    });
-  }
+  audio.addEventListener('play', () => setPlayingState(true));
+  audio.addEventListener('pause', () => setPlayingState(false));
+  audio.addEventListener('ended', () => {
+    audio.currentTime = 0;
+    audio.play().catch(() => setPlayingState(false));
+  });
 
-  // Auto-play on load attempt
+  // Intento de reproducción al cargar
   setTimeout(() => {
     playAudio();
-  }, 400);
+  }, 500);
 
-  // Mobile Autoplay unlocker: start on first touch/tap/scroll anywhere on the page
-  const unlockAudioOnMobile = () => {
-    if (!isPlaying && !userInteracted) {
+  // Desbloqueo en móvil al primer toque
+  const unlockOnFirstTouch = () => {
+    if (!isPlaying) {
       playAudio();
     }
-    window.removeEventListener('touchstart', unlockAudioOnMobile);
-    window.removeEventListener('touchend', unlockAudioOnMobile);
-    window.removeEventListener('pointerdown', unlockAudioOnMobile);
-    window.removeEventListener('scroll', unlockAudioOnMobile);
-    window.removeEventListener('click', unlockAudioOnMobile);
+    window.removeEventListener('touchstart', unlockOnFirstTouch);
+    window.removeEventListener('click', unlockOnFirstTouch);
   };
 
-  window.addEventListener('touchstart', unlockAudioOnMobile, { passive: true, once: true });
-  window.addEventListener('touchend', unlockAudioOnMobile, { passive: true, once: true });
-  window.addEventListener('pointerdown', unlockAudioOnMobile, { passive: true, once: true });
-  window.addEventListener('scroll', unlockAudioOnMobile, { passive: true, once: true });
-  window.addEventListener('click', unlockAudioOnMobile, { passive: true, once: true });
+  window.addEventListener('touchstart', unlockOnFirstTouch, { passive: true, once: true });
+  window.addEventListener('click', unlockOnFirstTouch, { passive: true, once: true });
 }
 
 /* ==========================================================================
