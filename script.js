@@ -163,7 +163,7 @@ function initNeonCanvas() {
 }
 
 /* ==========================================================================
-   3. AUDIO PLAYER (MP3 & Web Audio Synth Fallback)
+   3. AUDIO PLAYER (Autoplay, Mobile Unlock & Synth Fallback)
    ========================================================================== */
 function initAudioPlayer() {
   const musicBtn = document.getElementById('music-btn');
@@ -176,6 +176,7 @@ function initAudioPlayer() {
   let isPlaying = false;
   let synthLoop = null;
   let audioCtx = null;
+  let userInteracted = false;
 
   // Synthesized celebratory beat fallback
   function startSynthCelebration() {
@@ -188,6 +189,7 @@ function initAudioPlayer() {
       const notes = [261.63, 329.63, 392.00, 523.25, 440.00, 349.23];
       let step = 0;
 
+      if (synthLoop) clearInterval(synthLoop);
       synthLoop = setInterval(() => {
         if (!isPlaying) return;
         const osc = audioCtx.createOscillator();
@@ -218,23 +220,42 @@ function initAudioPlayer() {
     }
   }
 
-  function toggleMusic(e) {
-    if (e) e.preventDefault();
-    if (!isPlaying) {
-      setPlayingState(true);
-      if (audio) {
-        audio.play().catch(() => {
-          startSynthCelebration();
-        });
-      } else {
-        startSynthCelebration();
+  function playAudio() {
+    if (isPlaying) return;
+    setPlayingState(true);
+    if (audio) {
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            setPlayingState(true);
+          })
+          .catch((err) => {
+            console.log('Autoplay deferred until user interaction or fallback:', err);
+            // If native audio playback was rejected, use synth or wait for touch
+            startSynthCelebration();
+          });
       }
     } else {
-      setPlayingState(false);
-      if (audio) {
-        try { audio.pause(); } catch(err) {}
-      }
-      stopSynthCelebration();
+      startSynthCelebration();
+    }
+  }
+
+  function pauseAudio() {
+    setPlayingState(false);
+    if (audio) {
+      try { audio.pause(); } catch(err) {}
+    }
+    stopSynthCelebration();
+  }
+
+  function toggleMusic(e) {
+    if (e) e.preventDefault();
+    userInteracted = true;
+    if (!isPlaying) {
+      playAudio();
+    } else {
+      pauseAudio();
     }
   }
 
@@ -259,6 +280,29 @@ function initAudioPlayer() {
       audio.play().catch(() => setPlayingState(false));
     });
   }
+
+  // Auto-play on load attempt
+  setTimeout(() => {
+    playAudio();
+  }, 400);
+
+  // Mobile Autoplay unlocker: start on first touch/tap/scroll anywhere on the page
+  const unlockAudioOnMobile = () => {
+    if (!isPlaying && !userInteracted) {
+      playAudio();
+    }
+    window.removeEventListener('touchstart', unlockAudioOnMobile);
+    window.removeEventListener('touchend', unlockAudioOnMobile);
+    window.removeEventListener('pointerdown', unlockAudioOnMobile);
+    window.removeEventListener('scroll', unlockAudioOnMobile);
+    window.removeEventListener('click', unlockAudioOnMobile);
+  };
+
+  window.addEventListener('touchstart', unlockAudioOnMobile, { passive: true, once: true });
+  window.addEventListener('touchend', unlockAudioOnMobile, { passive: true, once: true });
+  window.addEventListener('pointerdown', unlockAudioOnMobile, { passive: true, once: true });
+  window.addEventListener('scroll', unlockAudioOnMobile, { passive: true, once: true });
+  window.addEventListener('click', unlockAudioOnMobile, { passive: true, once: true });
 }
 
 /* ==========================================================================

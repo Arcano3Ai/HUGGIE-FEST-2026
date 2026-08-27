@@ -1186,16 +1186,94 @@ body {
   transform: translateY(0);
 }
 
-/* ----------------- PREFERS REDUCED MOTION (ACCESSIBILITY) ----------------- */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+/* ----------------- MOBILE OPTIMIZATIONS (< 600px & < 400px) ----------------- */
+@media (max-width: 600px) {
+  .page-wrapper {
+    padding: 1rem 0.9rem 6rem 0.9rem;
+    gap: 1.8rem;
   }
-  .reveal-on-scroll {
-    opacity: 1 !important;
-    transform: none !important;
+
+  .audio-control-bar {
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+
+  .music-toggle-btn {
+    padding: 0.45rem 0.85rem;
+    font-size: 0.72rem;
+  }
+
+  .glass-card {
+    padding: 1.6rem 1.1rem;
+    border-radius: var(--radius-md);
+  }
+
+  .hero-meta-box {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.8rem 1rem;
+  }
+
+  .meta-divider {
+    display: none;
+  }
+
+  .neon-sticker {
+    font-size: 1.6rem;
+    opacity: 0.8;
+  }
+
+  .countdown-timer {
+    gap: 0.35rem;
+  }
+
+  .time-block {
+    min-width: 48px;
+  }
+
+  .time-val {
+    font-size: 1.7rem;
+  }
+
+  .time-separator {
+    font-size: 1.3rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .whatsapp-floating-btn {
+    bottom: 1.1rem;
+    right: 1.1rem;
+    padding: 0.75rem 1.1rem;
+    font-size: 0.85rem;
+  }
+
+  .cancel-item {
+    font-size: 0.82rem;
+    padding: 0.4rem 0.7rem;
+  }
+
+  .drink-visual-header {
+    font-size: 2.4rem;
+  }
+
+  .sparkle-center {
+    font-size: 2.9rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .title-huggie {
+    font-size: 2.8rem;
+  }
+  .title-fest {
+    font-size: 3.4rem;
+  }
+  .title-year {
+    font-size: 2rem;
+  }
+  .neon-btn-primary, .neon-btn-rsvp, .neon-btn-map {
+    padding: 0.9rem 1.4rem;
+    font-size: 0.95rem;
+    width: 100%;
   }
 }
